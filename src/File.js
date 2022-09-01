@@ -1,13 +1,14 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import Drop from "./Drop";
-import Selecteds from "./Selecteds";
+// import Drop from "./Drop";
+// import Selecteds from "./Selecteds";
+import Select from "react-select";
 
 const File = () => {
-  const [data, setSelect] = useState([]);
-  const [output,setOutput]=useState(null);
-  const [id,setId]=useState("")
-  console.log("this is uut==>",output)
+  const [option, setSelect] = useState([]);
+  const [label, setLabel] = useState(null);
+  const [id, setId] = useState(null);
+
   useEffect(() => {
     handleSelect();
   }, []);
@@ -22,31 +23,54 @@ const File = () => {
       .then((res) => res.json())
       .then((res) => {
         if (res) {
-            console.log(res)
-            setSelect(res)
+          setSelect(res);
         }
       });
   };
- 
 
+  const options = option.map((option) => ({
+    value: option.id,
+    label: option.name,
+  }));
+
+  const selectedValue = (selectedOption) => {
+    setLabel(selectedOption);
+  };
+  const selectedInput = (selectedOption) => {
+    setId(selectedOption);
+  };
 
   return (
     <div>
-      {/* <select placeholder="select..." onChange={value=>{setOutput((value.target.value))} } >
-           {data.map((datas)=> <option key={datas.id}  value={JSON.stringify(datas)} >{datas.name}</option> 
+      <Select options={options} onChange={selectedValue} />
 
-           )}
-        
-      </select>
-      <hr />
-      <p>You have selected <strong>{output &&JSON.parse(output).name} </strong>whose id is {output &&JSON.parse(output).id}</p> */}
+      <p>
+        you have <strong>{label && label.label}</strong> whose id is{" "}
+        <strong>{label && label.value}</strong>{" "}
+      </p>
 
-       <Selecteds/>
-
-      <Drop isMulti />
+      <Select options={options} onChange={selectedInput} isMulti />
+      <strong>{id&& id.map((id)=>id.label)}</strong>
     </div>
-
   );
 };
-
 export default File;
+
+{
+  /* <p>
+        you have <strong>{id && id.label}</strong> whose id is{" "}
+        <strong>{id && id.value}</strong>{" "}
+      </p> 
+      <Selecteds/>
+
+       <Drop isMulti /> */
+}
+
+// <select placeholder="select..." onChange={value=>{setOutput((value.target.value))} } >
+// {data.map((datas)=> <option key={datas.id}  value={JSON.stringify(datas)} >{datas.name}</option>
+
+// )}
+
+// </select>
+// <hr />
+// <p>You have selected <strong>{output &&JSON.parse(output).name} </strong>whose id is {output &&JSON.parse(output).id}</p>
