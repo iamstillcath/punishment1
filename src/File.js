@@ -1,7 +1,5 @@
 import React from "react";
 import { useEffect, useState } from "react";
-// import Drop from "./Drop";
-// import Selecteds from "./Selecteds";
 import Select from "react-select";
 
 const File = () => {
@@ -55,22 +53,3 @@ const File = () => {
   );
 };
 export default File;
-
-{
-  /* <p>
-        you have <strong>{id && id.label}</strong> whose id is{" "}
-        <strong>{id && id.value}</strong>{" "}
-      </p> 
-      <Selecteds/>
-
-       <Drop isMulti /> */
-}
-
-// <select placeholder="select..." onChange={value=>{setOutput((value.target.value))} } >
-// {data.map((datas)=> <option key={datas.id}  value={JSON.stringify(datas)} >{datas.name}</option>
-
-// )}
-
-// </select>
-// <hr />
-// <p>You have selected <strong>{output &&JSON.parse(output).name} </strong>whose id is {output &&JSON.parse(output).id}</p>
